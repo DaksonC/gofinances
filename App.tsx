@@ -1,5 +1,5 @@
 import React from 'react';
-import AppLoading from 'expo-app-loading';
+import { Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from 'styled-components';
 import {
@@ -20,7 +20,7 @@ export default function App() {
   });
   
   if (!fontsLoaded) {
-    return <AppLoading />
+    return <Text>Carregando...</Text> 
   }
   
   return (
