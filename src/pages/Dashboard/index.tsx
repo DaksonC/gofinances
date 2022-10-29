@@ -1,3 +1,5 @@
+import React from 'react';
+import { HighlightCard } from '../../components/HighlightCard';
 import { 
   Container,
   Header, 
@@ -6,7 +8,9 @@ import {
   User, 
   UserGreeting, 
   UserInfo, 
-  UserName
+  UserName,
+  Icon,
+  HighlightCards,
 } from './styles';
 
 export const Dashboard = () => {
@@ -14,15 +18,21 @@ export const Dashboard = () => {
     <Container>
       <Header>
         <UserWrapper>
-        <UserInfo>
-          <Photo source={{ uri: 'https://avatars.githubusercontent.com/u/81385265?v=4' }} />
-          <User>
-            <UserGreeting>Olá,</UserGreeting>
-            <UserName>Dakson</UserName>
-          </User>
-        </UserInfo>
+          <UserInfo>
+            <Photo source={{ uri: 'https://avatars.githubusercontent.com/u/81385265?v=4' }} />
+            <User>
+              <UserGreeting>Olá,</UserGreeting>
+              <UserName>Dakson</UserName>
+            </User>
+          </UserInfo>
+          <Icon name='power'/>
         </UserWrapper>
       </Header>
+      <HighlightCards>
+        <HighlightCard />
+        <HighlightCard />
+        <HighlightCard />
+      </HighlightCards>
     </Container>
   );
 }
