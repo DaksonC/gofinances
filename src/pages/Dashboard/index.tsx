@@ -10,8 +10,11 @@ import {
   UserName,
   Icon,
   HighlightCards,
+  Transactions,
+  Title,
 } from './styles';
 import { HighlightCard } from '../../components/HighlightCard';
+import { TransactionCard } from '../../components/TransactionCard';
 
 export const Dashboard = () => {
   return (
@@ -54,6 +57,20 @@ export const Dashboard = () => {
           lastTransaction='01 à 16 de abril'
         />
       </HighlightCards>
+        <Transactions>
+          <Title>Listagem</Title>
+          <TransactionCard 
+            // type='positive'
+            title='Desenvolvimento de site'
+            amount='R$ 12.000,00'
+            category={{
+              key:'1',
+              name: 'Vendas',
+              icon: 'dollar-sign'
+            }}
+            date='13/04/2021'
+          />
+        </Transactions>
     </Container>
   );
 }

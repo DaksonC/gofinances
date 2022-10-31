@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from 'styled-components';
 import {
@@ -20,7 +20,7 @@ export default function App() {
   });
   
   if (!fontsLoaded) {
-    return <Text>Carregando...</Text> 
+    return <Text style={styles.isLoading}>Carregando...</Text> 
   }
   
   return (
@@ -30,3 +30,11 @@ export default function App() {
     </ThemeProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  isLoading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
