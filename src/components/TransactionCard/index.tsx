@@ -10,22 +10,17 @@ import {
   Date
 } from './styles';
 
-export interface Category {
-  key: string;
-  name: string;
-  icon: string;
-}
-
-export interface TransactionCardProps {
-  // type: 'positive' | 'negative';
+interface TransactionCardProps {
   title: string;
   amount: string;
-  category: Category;
+  category: [
+    icon: string,
+    name: string,
+  ];
   date: string;
 }
 
 export const TransactionCard = ({
-  // type,
   title,
   amount,
   category,
@@ -37,8 +32,8 @@ export const TransactionCard = ({
       <Amount>{amount}</Amount>
       <Footer>
         <Category>
-          <Icon name='dollar-sign' />
-          <CategoryName>{category}</CategoryName>
+          <Icon name={category[0]} />
+          <CategoryName>{category[1]}</CategoryName>
         </Category>
         <Date>{date}</Date>
       </Footer>

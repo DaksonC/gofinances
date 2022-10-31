@@ -28,7 +28,7 @@ export const Footer = styled.View`
   margin-top: 19px;
 `;
 
-export const Category = styled.Text`
+export const Category = styled.View`
   color: ${({ theme }) => theme.colors.text};
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${RFValue(14)}px;

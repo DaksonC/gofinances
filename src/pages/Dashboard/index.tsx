@@ -60,14 +60,12 @@ export const Dashboard = () => {
         <Transactions>
           <Title>Listagem</Title>
           <TransactionCard 
-            // type='positive'
             title='Desenvolvimento de site'
             amount='R$ 12.000,00'
-            category={{
-              key:'1',
-              name: 'Vendas',
-              icon: 'dollar-sign'
-            }}
+            category={[
+              'dollar-sign',
+              'Vendas'
+            ]}
             date='13/04/2021'
           />
         </Transactions>
