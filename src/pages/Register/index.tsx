@@ -7,7 +7,8 @@ import {
   Title 
 } from './styles';
 import { Input } from '../../components/Forms/Input';
-import { Button } from '../../components/Button';
+import { ButtonAdd } from '../../components/Forms/ButtonAdd';
+
 
 export const Register = () => {
   return (
@@ -26,7 +27,7 @@ export const Register = () => {
             placeholderTextColor={'#7A7A80'}  
           />
         </Fields>
-        <Button title="Enviar" />
+        <ButtonAdd title="Enviar" />
       </Form>
     </Container>
   )
