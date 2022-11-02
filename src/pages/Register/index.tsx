@@ -10,6 +10,7 @@ import {
 import { Input } from '../../components/Forms/Input';
 import { ButtonAdd } from '../../components/Forms/ButtonAdd';
 import { TransactionTypeButton } from '../../components/Forms/TransactionTypeButton';
+import { CategorySelect } from '../../components/Forms/CategorySelect';
 
 
 export const Register = () => {
@@ -48,6 +49,9 @@ export const Register = () => {
               isActive={transactionType === 'down'}
             />
           </TransactionsTypes>
+          <CategorySelect 
+            title="Categoria"
+          />
         </Fields>
         <ButtonAdd title="Enviar" />
       </Form>
