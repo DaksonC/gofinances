@@ -12,6 +12,7 @@ import {
 import themes from './src/global/styles/theme';
 import { Dashboard } from './src/pages/Dashboard';
 import { Register } from './src/pages/Register';
+import { CategorySelect } from './src/pages/CategorySelect';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -28,7 +29,9 @@ export default function App() {
     <ThemeProvider theme={themes}>
       <StatusBar style="light" />
       {/* <Dashboard /> */}
-      <Register />
+      {/* <Register /> */}
+      <CategorySelect 
+      />
     </ThemeProvider>
   );
 }
