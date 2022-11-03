@@ -32,7 +32,7 @@ export const Category = styled.TouchableOpacity<CategoryProps>`
   flex-direction: row;
   align-items: center;
   background-color: ${({ isActive, theme }) =>
-    isActive ? theme.colors.background_light : theme.colors.background};
+    isActive ? theme.colors.shape : theme.colors.background};
 `;
 
 export const Icon = styled(Feather)`
