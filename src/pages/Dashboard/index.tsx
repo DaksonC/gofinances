@@ -13,6 +13,7 @@ import {
   Transactions,
   Title,
   TransactionList,
+  LogoutButton
 } from './styles';
 import { HighlightCard } from '../../components/HighlightCard';
 import { ITransactionCardProps, TransactionCard } from '../../components/TransactionCard';
@@ -75,7 +76,9 @@ export const Dashboard = () => {
               <UserName>Dakson</UserName>
             </User>
           </UserInfo>
-          <Icon name='power'/>
+          <LogoutButton >
+            <Icon name='power'/>
+          </LogoutButton>
         </UserWrapper>
       </Header>
       <HighlightCards>

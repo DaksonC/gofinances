@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { Text, StyleSheet, StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components';
+import { NavigationContainer } from '@react-navigation/native';
 import {
   useFonts,
   Poppins_400Regular,
@@ -9,10 +9,12 @@ import {
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 
+import { AppRoutes } from './src/routes/app.routes';
 import themes from './src/global/styles/theme';
-import { Dashboard } from './src/pages/Dashboard';
 import { Register } from './src/pages/Register';
+import { Dashboard } from './src/pages/Dashboard';
 import { CategorySelect } from './src/pages/CategorySelect';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -26,12 +28,18 @@ export default function App() {
   }
   
   return (
-    <ThemeProvider theme={themes}>
-      <StatusBar style="light" />
-      {/* <Dashboard /> */}
-      <Register />
-      {/* <CategorySelect /> */}
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider theme={themes}>
+        <NavigationContainer>
+          <StatusBar 
+            barStyle="light-content" 
+            backgroundColor='transparent'
+            translucent
+            />
+          <AppRoutes />
+        </NavigationContainer>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }
 
