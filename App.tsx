@@ -1,7 +1,12 @@
+import 'react-native-gesture-handler';
+// import 'intl/locale-data/jsonp/pt-BR';
+// import 'intl';
+
 import React from 'react';
-import { Text, StyleSheet, StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components';
+import { Text, StyleSheet, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
   useFonts,
   Poppins_400Regular,
@@ -9,12 +14,8 @@ import {
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 
-import { AppRoutes } from './src/routes/app.routes';
 import themes from './src/global/styles/theme';
-import { Register } from './src/pages/Register';
-import { Dashboard } from './src/pages/Dashboard';
-import { CategorySelect } from './src/pages/CategorySelect';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { AppRoutes } from './src/routes/app.routes';
 
 export default function App() {
   const [fontsLoaded] = useFonts({

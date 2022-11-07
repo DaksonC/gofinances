@@ -9,7 +9,7 @@ interface Props extends RectButtonProps {
 
 export const ButtonAdd = ({ title, onPress, ...rest }: Props) => {
   return (
-    <Container { ...rest}>
+    <Container onPress={onPress} { ...rest}>
       <Title>{title}</Title>
     </Container>
   )

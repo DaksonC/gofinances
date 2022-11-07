@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import * as yup from "yup";
 import { 
   Alert,
   Keyboard, 
   Modal, 
-  TouchableWithoutFeedback 
 } from 'react-native'
 import { 
   Container, 
@@ -77,7 +77,11 @@ export const Register = () => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback 
+      onPress={Keyboard.dismiss}
+      containerStyle={{flex: 1}}
+      style={{flex: 1}}
+    >
       <Container>
         <Header>
           <Title>Cadastro</Title>
