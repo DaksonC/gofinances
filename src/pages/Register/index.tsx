@@ -1,14 +1,17 @@
 import React, {useState,useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
 import { yupResolver } from '@hookform/resolvers/yup';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import * as yup from "yup";
 import { 
   Alert,
   Keyboard, 
   Modal, 
 } from 'react-native'
+
+import * as yup from "yup";
+import  uuid from 'react-native-uuid';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { 
   Container, 
@@ -26,6 +29,10 @@ import { TransactionTypeButton } from '../../components/Forms/TransactionTypeBut
 
 interface FormData {
   [name: string]: string;
+}
+
+interface NavigationProps {
+  navigate: (screen: string) => void;
 }
 
 const schema = yup.object({
@@ -48,7 +55,9 @@ export const Register = () => {
     name: 'Categoria'
   });
 
-  const { control, handleSubmit, formState:{ errors } } = useForm({
+  const navigation = useNavigation<NavigationProps>();
+
+  const { control, handleSubmit, formState:{ errors }, reset } = useForm({
     resolver: yupResolver(schema)
   });
 
@@ -71,15 +80,34 @@ export const Register = () => {
     if(category.key === 'category')
       return Alert.alert('Selecione a categoria');
       
-    const data = {
+    const newTransaction = {
+      id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
       transactionType,
-      category: category.key
+      category: category.key,
+      date: new Date()
     }
 
     try{
-      await AsyncStorage.setItem(dataKey, JSON.stringify(data));
+      const data = await AsyncStorage.getItem(dataKey);
+      const currentData = data ? JSON.parse(data) : [];
+
+      const dataFormatted = [
+        ...currentData,
+        newTransaction
+      ]
+      await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
+
+      reset();
+      setTransactionType('');
+      setCategory({
+        key: 'category',
+        name: 'Categoria'
+      });
+
+      navigation.navigate('Listagem');
+
     } catch (error) {
       console.log(error);
       Alert.alert('Não foi possível salvar');
