@@ -27,41 +27,42 @@ export interface IDataListProps extends ITransactionCardProps  {
 }
 
 export const Dashboard = () => {
-  const data: IDataListProps[] = [
-    {
-      id: '1',
-      type: 'positive',
-      title:'Desenvolvimento de site',
-      amount:'R$ 12.000,00',
-      category:{
-        name: 'Vendas',
-        icon:'dollar-sign',
-      },
-      date:'13/04/2021'
-    },
-    {
-      id: '2',
-      type: 'negative',
-      title:'Hamburgueria Pizzy',
-      amount:'R$ 59,00',
-      category:{
-        name:'Alimentação',
-        icon:'coffee',
-      },
-      date:'13/04/2021'
-    },
-    {
-      id: '3',
-      type: 'negative',
-      title:'Aluguel do apartamento',
-      amount:'R$ 1.200,00',
-      category:{
-        name:'Casa',
-        icon:'shopping-bag',
-      },
-      date:'13/04/2021'
-    },
-]
+  const [data, setData] = useState<IDataListProps[]>([]);
+
+  async function laodTransactions() {
+    const dataKey = '@gofinances:transactions';
+    const response = await AsyncStorage.getItem(dataKey);
+    const transactions = response ? JSON.parse(response) : [];
+
+    const transactionsFormatted: IDataListProps[] = 
+    transactions.map((item: IDataListProps) => {
+      const amount = Number(item.amount).toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
+
+      const date = Intl.DateTimeFormat('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: '2-digit'
+      }).format(new Date(item.date));
+
+      return {
+        id: item.id,
+        type: item.type,
+        name: item.name,
+        amount,
+        category: item.category,
+        date,
+      }
+    });
+    
+    setData(transactionsFormatted);
+  }
+  
+  useEffect(() => { 
+    laodTransactions() 
+  }, []);
 
   return (
     <Container>
