@@ -97,6 +97,7 @@ export const Register = () => {
         ...currentData,
         newTransaction
       ]
+
       await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
 
       reset();
@@ -122,6 +123,11 @@ export const Register = () => {
 
     loadData();
   }, []);
+
+  // Remove histótico de transações
+  // useEffect(() => {
+  //   AsyncStorage.removeItem(dataKey);
+  // }, []);
 
   return (
     <TouchableWithoutFeedback 

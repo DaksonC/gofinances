@@ -10,14 +10,16 @@ import {
   Date
 } from './styles';
 
+interface ICategory {
+  name: string;
+  icon: string;
+}
+
 export interface ITransactionCardProps {
   type: 'positive' | 'negative';
   title: string;
   amount: string;
-  category: [
-    icon: string,
-    name: string,
-  ];
+  category: ICategory;
   date: string;
 }
 interface Data {
@@ -36,9 +38,9 @@ export const TransactionCard = ({ data }: Data) => {
       </Amount>
       <Footer>
         <Category>
-          <Icon name={data.category[0]} />
+          <Icon name={data.category.icon} />
           <CategoryName>
-            {data.category[1]}
+            {data.category.name}
           </CategoryName>
         </Category>
         <Date>

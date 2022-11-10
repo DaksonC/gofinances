@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { 
   Container,
   Header, 
@@ -15,8 +16,11 @@ import {
   TransactionList,
   LogoutButton
 } from './styles';
+import { 
+  ITransactionCardProps, 
+  TransactionCard 
+} from '../../components/TransactionCard';
 import { HighlightCard } from '../../components/HighlightCard';
-import { ITransactionCardProps, TransactionCard } from '../../components/TransactionCard';
 
 export interface IDataListProps extends ITransactionCardProps  {
   id: string;
@@ -29,10 +33,10 @@ export const Dashboard = () => {
       type: 'positive',
       title:'Desenvolvimento de site',
       amount:'R$ 12.000,00',
-      category:[
-        'dollar-sign',
-        'Vendas'
-      ],
+      category:{
+        name: 'Vendas',
+        icon:'dollar-sign',
+      },
       date:'13/04/2021'
     },
     {
@@ -40,10 +44,10 @@ export const Dashboard = () => {
       type: 'negative',
       title:'Hamburgueria Pizzy',
       amount:'R$ 59,00',
-      category:[
-        'coffee',
-        'Alimentação'
-      ],
+      category:{
+        name:'Alimentação',
+        icon:'coffee',
+      },
       date:'13/04/2021'
     },
     {
@@ -51,10 +55,10 @@ export const Dashboard = () => {
       type: 'negative',
       title:'Aluguel do apartamento',
       amount:'R$ 1.200,00',
-      category:[
-        'shopping-bag',
-        'Casa'
-      ],
+      category:{
+        name:'Casa',
+        icon:'shopping-bag',
+      },
       date:'13/04/2021'
     },
 ]
