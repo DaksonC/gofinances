@@ -33,7 +33,7 @@ export const TransactionCard = ({ data }: Data) => {
         {data.name}
       </Title>
       <Amount type={data.type}>
-        {data.type === 'negative' && '- '}
+        {data.type === 'negative' ? '- ' : '+ '}
         {data.amount}
       </Amount>
       <Footer>
