@@ -174,7 +174,7 @@ export const Register = () => {
             </TransactionsTypes>
             <CategorySelectButton 
               title={category.name}
-              onPress={handleOpenSelectCategoryModal}
+              onPress={() => handleOpenSelectCategoryModal()}
             />
           </Fields>
           <ButtonAdd 
