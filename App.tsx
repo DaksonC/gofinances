@@ -25,7 +25,9 @@ export default function App() {
   });
   
   if (!fontsLoaded) {
-    return <Text style={styles.isLoading}>Carregando...</Text> 
+    return <Text 
+      style={styles.isLoading}
+      >Carregando...</Text> 
   }
   
   return (
@@ -47,7 +49,9 @@ export default function App() {
 const styles = StyleSheet.create({
   isLoading: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    color: 'white',
+    backgroundColor: '#121015',
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
 });
