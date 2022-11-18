@@ -5,4 +5,6 @@ export const categories = [
     { key: 'car', name: 'Carro', icon: 'crosshair', color: '#E83F5B' },
     { key: 'leisure', name: 'Lazer', icon: 'heart', color: '#26195C' },
     { key: 'studies', name: 'Estudos', icon: 'book', color: '#9C001A' },
+    { key: 'rent', name: 'Aluguel', icon: 'home', color: '#5639e3' },
+    { key: 'others', name: 'Outros', icon: 'archive', color: '#000' },
 ]; 
