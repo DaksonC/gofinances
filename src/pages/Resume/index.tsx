@@ -1,8 +1,12 @@
+import { VictoryPie } from 'victory-native';
 import React, { useEffect, useState } from 'react';
-import { HistoryCard } from '../../components/HistoryCard';
-import { Container, Content, Header, Title } from "./styles";
+import { RFValue } from 'react-native-responsive-fontsize';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { ChartContainer, Container, Content, Header, Month, MonthSelect, MonthSelectButton, MonthSelectIcon, Title } from "./styles";
 import { categories } from '../../utils/categories';
+import { HistoryCard } from '../../components/HistoryCard';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 interface ITransactionData {
   type: 'positive' | 'negative';
@@ -15,8 +19,10 @@ interface ITransactionData {
 interface ICategoryData {
   key: string;
   name: string;
-  total: string;
+  total: number;
+  totalFormatted: string;
   color: string;
+  percent: string;
 }
 
 export function Resume() {
@@ -30,33 +36,44 @@ export function Resume() {
     const expensives = responseFormatted.filter((expensive: ITransactionData) =>
       expensive.type === 'negative');
 
+    const expensivesTotal = expensives.reduce(
+      (acumulator: number, expensive: ITransactionData) => 
+      {
+        return acumulator + Number(expensive.amount);
+      }, 0);
+
     const totalCategory: ICategoryData[] = [];
 
-      categories.forEach(category => {
-        let categorySum = 0;
+    categories.forEach(category => {
+      let categorySum = 0;
 
-        expensives.forEach((expensive: ITransactionData) => {
-          if (expensive.category === category.key) {
-            categorySum += Number(expensive.amount);
-          }
-        });
-
-        if (categorySum > 0) {
-          const total = categorySum
-            .toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL'
-            });
-          totalCategory.push({
-            key: category.key,
-            name: category.name,
-            color: category.color,
-            total,
-          });
+      expensives.forEach((expensive: ITransactionData) => {
+        if (expensive.category === category.key) {
+          categorySum += Number(expensive.amount);
         }
       });
 
-      setTotalByCategories(totalCategory);
+      if (categorySum > 0) {
+        const totalFormatted = categorySum
+          .toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+          });
+
+        const percent = `${(categorySum / expensivesTotal * 100).toFixed(0)}%`;
+        
+        totalCategory.push({
+          key: category.key,
+          name: category.name,
+          color: category.color,
+          total: categorySum,
+          totalFormatted,
+          percent,
+        });
+      }
+    });
+
+    setTotalByCategories(totalCategory);
   }
 
   useEffect(() => {
@@ -68,13 +85,44 @@ export function Resume() {
       <Header>
         <Title>Resumo por categoria</Title>
       </Header>
-      <Content>
+      <Content
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingHorizontal: 24,
+          paddingBottom: useBottomTabBarHeight()
+        }}
+      >
+        <MonthSelect>
+          <MonthSelectButton>
+            <MonthSelectIcon name="chevron-left" />
+          </MonthSelectButton>
+          <Month>Maio</Month>
+          <MonthSelectButton>
+            <MonthSelectIcon name="chevron-right" />
+          </MonthSelectButton>
+        </MonthSelect>
+        <ChartContainer>
+          <VictoryPie
+            data={totalByCategories}
+            colorScale={totalByCategories.map(category => category.color)}
+            style={{
+              labels: {
+                fontSize: RFValue(18),
+                fontWeight: 'bold',
+                fill: 'white'
+              }
+            }}
+            labelRadius={70}
+            x="percent"
+            y="name"
+          />
+        </ChartContainer>
         {
           totalByCategories.map(item => (
-            <HistoryCard 
+            <HistoryCard
               key={item.key}
               title={item.name}
-              amount={item.total}
+              amount={item.totalFormatted}
               color={item.color}
             />
           ))
