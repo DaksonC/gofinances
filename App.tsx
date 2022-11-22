@@ -17,29 +17,32 @@ import {
 import themes from './src/global/styles/theme';
 import { AppRoutes } from './src/routes/app.routes';
 
+import { SignIn } from './src/pages/SignIn';
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_500Medium,
     Poppins_700Bold,
   });
-  
+
   if (!fontsLoaded) {
-    return <Text 
+    return <Text
       style={styles.isLoading}
-      >Carregando...</Text> 
+    >Carregando...</Text>
   }
-  
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider theme={themes}>
         <NavigationContainer>
-          <StatusBar 
-            barStyle="light-content" 
+          <StatusBar
+            barStyle="light-content"
             backgroundColor='transparent'
             translucent
-            />
-          <AppRoutes />
+          />
+          {/* <AppRoutes /> */}
+          <SignIn />
         </NavigationContainer>
       </ThemeProvider>
     </GestureHandlerRootView>
