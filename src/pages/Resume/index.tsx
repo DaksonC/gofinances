@@ -1,7 +1,7 @@
 import { ptBR } from 'date-fns/locale';
 import { VictoryPie } from 'victory-native';
 import { ActivityIndicator } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { addMonths, subMonths, format } from 'date-fns';
 import { RFValue } from 'react-native-responsive-fontsize';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -22,6 +22,7 @@ import theme from '../../global/styles/theme';
 import { categories } from '../../utils/categories';
 import { HistoryCard } from '../../components/HistoryCard';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { useFocusEffect } from '@react-navigation/native';
 
 interface ITransactionData {
   type: 'positive' | 'negative';
@@ -46,6 +47,8 @@ export function Resume() {
   const [totalByCategories, setTotalByCategories] = useState<ICategoryData[]>([]);
 
   function handleDateChange(action: 'next' | 'prev') {
+    setIsLoading(true);
+
     if (action === 'next') {
       setSelectedDate(addMonths(selectedDate, 1));
     } else {
@@ -107,6 +110,10 @@ export function Resume() {
   useEffect(() => {
     loadData();
   }, [selectedDate]);
+
+  useFocusEffect(useCallback(() => {
+    loadData();
+  }, []));
 
   return (
     <Container>
