@@ -50,3 +50,10 @@ export const Month = styled.Text`
   font-size: ${RFValue(20)}px;
   color: ${({ theme }) => theme.colors.title};
 `;
+
+export const LoadContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.background};
+`;

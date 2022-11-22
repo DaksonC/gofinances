@@ -148,60 +148,60 @@ export const Dashboard = () => {
   return (
     <>
       {
-        isLoading 
-        ? <LoadContainer>
-            <ActivityIndicator color={theme.colors.line} size='large' />
-        </LoadContainer> 
-        : <Container>
-          <Header>
-            <UserWrapper>
-              <UserInfo>
-                <Photo
-                  source={
-                    {
-                      uri: 'https://avatars.githubusercontent.com/u/81385265?v=4'
+        isLoading
+          ? <LoadContainer>
+            <ActivityIndicator color={theme.colors.primary} size='large' />
+          </LoadContainer>
+          : <Container>
+            <Header>
+              <UserWrapper>
+                <UserInfo>
+                  <Photo
+                    source={
+                      {
+                        uri: 'https://avatars.githubusercontent.com/u/81385265?v=4'
+                      }
                     }
-                  }
-                />
-                <User>
-                  <UserGreeting>Olá,</UserGreeting>
-                  <UserName>Dakson</UserName>
-                </User>
-              </UserInfo>
-              <LogoutButton >
-                <Icon name='power' />
-              </LogoutButton>
-            </UserWrapper>
-          </Header>
-          <HighlightCards>
-            <HighlightCard
-              type='up'
-              title='Entradas'
-              amount={HighlightCardsData.entries?.amount}
-              lastTransaction={HighlightCardsData.entries?.lastTransaction}
-            />
-            <HighlightCard
-              type='down'
-              title='Saídas'
-              amount={HighlightCardsData.expensives?.amount}
-              lastTransaction={HighlightCardsData.expensives?.lastTransaction}
-            />
-            <HighlightCard
-              type='total'
-              title='Total'
-              amount={HighlightCardsData.total?.amount}
-              lastTransaction={HighlightCardsData.total?.lastTransaction}
-            />
-          </HighlightCards>
-          <Transactions>
-            <Title>Listagem</Title>
-            <TransactionList
-              data={data}
-              keyExtractor={item => item.id.toString()}
-              renderItem={({ item }) => <TransactionCard data={item} />}
-            />
-          </Transactions>
-        </Container>
+                  />
+                  <User>
+                    <UserGreeting>Olá,</UserGreeting>
+                    <UserName>Dakson</UserName>
+                  </User>
+                </UserInfo>
+                <LogoutButton >
+                  <Icon name='power' />
+                </LogoutButton>
+              </UserWrapper>
+            </Header>
+            <HighlightCards>
+              <HighlightCard
+                type='up'
+                title='Entradas'
+                amount={HighlightCardsData.entries?.amount}
+                lastTransaction={HighlightCardsData.entries?.lastTransaction}
+              />
+              <HighlightCard
+                type='down'
+                title='Saídas'
+                amount={HighlightCardsData.expensives?.amount}
+                lastTransaction={HighlightCardsData.expensives?.lastTransaction}
+              />
+              <HighlightCard
+                type='total'
+                title='Total'
+                amount={HighlightCardsData.total?.amount}
+                lastTransaction={HighlightCardsData.total?.lastTransaction}
+              />
+            </HighlightCards>
+            <Transactions>
+              <Title>Listagem</Title>
+              <TransactionList
+                data={data}
+                keyExtractor={item => item.id.toString()}
+                renderItem={({ item }) => <TransactionCard data={item} />}
+              />
+            </Transactions>
+          </Container>
       }
     </>
   );
