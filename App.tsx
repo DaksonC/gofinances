@@ -18,6 +18,7 @@ import themes from './src/global/styles/theme';
 import { AppRoutes } from './src/routes/app.routes';
 
 import { SignIn } from './src/pages/SignIn';
+import { AuthProvider } from './src/Hooks/auth';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -41,8 +42,10 @@ export default function App() {
             backgroundColor='transparent'
             translucent
           />
-          {/* <AppRoutes /> */}
-          <SignIn />
+          <AuthProvider>
+            {/* <AppRoutes /> */}
+            <SignIn />
+          </AuthProvider>
         </NavigationContainer>
       </ThemeProvider>
     </GestureHandlerRootView>

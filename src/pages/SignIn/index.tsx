@@ -15,9 +15,13 @@ import {
   ButtonWrapper,
 } from "./styles";
 import { SignInSocialButton } from "../../components/SignInSocialButton";
+import { useAuth } from "../../Hooks/auth";
 
 
 export function SignIn() {
+  const { user } = useAuth();
+  console.log(user.email);
+
   return (
     <Container>
       <Header>
